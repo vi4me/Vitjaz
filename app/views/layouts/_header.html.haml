@@ -1,0 +1,40 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top
+  %a.navbar-brand{:href => "/posts/fresh"}
+    = image_tag 'html.jpeg', size: '20x20'
+    Vitjaz
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      %li.nav-item{class: "#{'active font-weight-bold' if current_page?(top_posts_path)}"}
+        = link_to top_posts_path, class: 'nav-link' do
+          .fa.fa-fire
+          Лучшее
+      %li.nav-item{class: "#{'active font-weight-bold' if current_page?(fresh_posts_path)}"}
+        = link_to fresh_posts_path, class: 'nav-link' do
+          .far.fa-clock
+          Свежее
+
+    %ul.navbar-nav.mr-right
+      - if current_user
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(edit_user_registration_path)}"}
+          = link_to edit_user_registration_path, class: 'nav-link' do
+            .fa.fa-user
+            = current_user.username
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(destroy_user_session_path)}"}
+          = link_to destroy_user_session_path, method: :delete, class: 'nav-link' do
+            .fa.fa-sign-out-alt
+            Выйти
+      - else
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
+          = link_to 'Register', new_user_registration_path, class: 'nav-link'
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
+          = link_to 'Login', new_user_session_path, class: 'nav-link'
+
+        -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
+        -#   = link_to user_google_oauth2_omniauth_authorize_path, class: 'nav-link' do
+        -#     .fab.fa-google
+
+    -# %form.form-inline.my-2.my-lg-0
+    -#   %input.form-control.mr-sm-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
+    -#   %button.btn.btn-outline-success.my-2.my-sm-0{type: "submit"} Search

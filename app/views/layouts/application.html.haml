@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Vitjaz
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag 'html.jpeg'
+  %body#body-human
+    = render 'layouts/header'
+    .container
+      %p
+      = render 'layouts/messages'
+      .row
+        .col-md-8
+          = yield
+        .col-md-4
+          - if current_user
+            = link_to new_post_path, class: 'btn btn-block btn-success' do
+              .fa.fa-plus
+              Новый пост
+            %p
+          .btn.btn-info.btn-block.disabled
+            .fa.fa-user
+            Участники:
+            %span.badge.badge-light
+              = User.count
+          %p
+          .btn.btn-info.btn-block.disabled
+            .fa.fa-fire
+            Посты:
+            %span.badge.badge-light
+              = Post.count
+          %p
+          .btn.btn-info.btn-block.disabled
+            .fa.fa-thumbs-up
+            Голоса:
+            %span.badge.badge-light
+              = ActsAsVotable::Vote.count
+          %p

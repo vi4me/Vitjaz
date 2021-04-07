@@ -1,0 +1,13 @@
+= link_to like_post_path(post), method: :put, remote: true, id: "like-link-#{post.id}", class: 'btn' do
+  - if current_user.voted_up_on?(post)
+    .text-success.fa.fa-thumbs-up
+    %b= post.cached_votes_score
+    .text-secondary.fa.fa-thumbs-down
+  - elsif current_user.voted_down_on?(post)
+    .text-secondary.fa.fa-thumbs-up
+    %b= post.cached_votes_score
+    .text-danger.fa.fa-thumbs-down
+  - else
+    .text-secondary.fa.fa-thumbs-up
+    %b= post.cached_votes_score
+    .text-secondary.fa.fa-thumbs-down

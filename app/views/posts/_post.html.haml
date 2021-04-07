@@ -1,0 +1,34 @@
+.card
+  .author.d-flex.justify-content-around
+    .author__text
+      Автор
+    .author__email
+      = post.user.email
+  %h2.card-header.text-center
+    = link_to post.title, post
+  .card-body
+    = post.content
+    -# = truncate(strip_tags(post.content.to_s), length: 500)
+  .card-footer
+    %small
+      = post.created_at.strftime('%H:%M, %d.%m.%y')
+
+  .card-footer.text-center
+    - if current_user
+      = content_tag "div", id: "like-link-#{post.id}" do
+        = render 'posts/like_link', post: post
+    - else
+      Рейтинг
+      %b= post.cached_votes_score
+    -# = post.weighted_average
+  - if current_user
+    - if post.user == current_user
+      .btn-group
+        = link_to edit_post_path(post), class: 'btn btn-sm btn-warning' do
+          .fa.fa-edit
+          Редактировать
+        = link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do
+          .fa.fa-trash
+          Удалить
+
+%p
