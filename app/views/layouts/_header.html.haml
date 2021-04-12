@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top
   %a.navbar-brand{:href => "/posts/fresh"}
-    -# = image_tag 'html.jpeg', size: '20x20'
+    = image_tag 'html.jpeg', size: '20x20'
     Vitjaz
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
@@ -31,9 +31,9 @@
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
           = link_to 'Login', new_user_session_path, class: 'nav-link'
 
-        -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
-        -#   = link_to user_google_oauth2_omniauth_authorize_path, class: 'nav-link' do
-        -#     .fab.fa-google
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
+          = link_to user_google_oauth2_omniauth_authorize_path, class: 'nav-link' do
+            .fab.fa-google
 
     -# %form.form-inline.my-2.my-lg-0
     -#   %input.form-control.mr-sm-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
