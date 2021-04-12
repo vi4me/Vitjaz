@@ -21,14 +21,13 @@
       Рейтинг
       %b= post.cached_votes_score
     -# = post.weighted_average
-  - if current_user
-    - if post.user == current_user
-      .btn-group
-        = link_to edit_post_path(post), class: 'btn btn-sm btn-warning' do
-          .fa.fa-edit
-          Редактировать
-        = link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do
-          .fa.fa-trash
-          Удалить
+  - if post.user == current_user || current_user.try(:admin?)
+    .btn-group
+      = link_to edit_post_path(post), class: 'btn btn-sm btn-warning' do
+        .fa.fa-edit
+        Редактировать
+      = link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do
+        .fa.fa-trash
+        Удалить
 
 %p

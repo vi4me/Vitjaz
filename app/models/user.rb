@@ -8,6 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
  def username
-   self.email.split(/@/).first
+   self.email.split(/@/).first.capitalize
  end
 end

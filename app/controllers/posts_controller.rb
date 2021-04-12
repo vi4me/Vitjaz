@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if @post.user_id == current_user.id
+    if @post.user = current_user
     else
       redirect_to root_path, notice: 'У вас нет прав!'
     end
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.user_id == current_user.id
+    if @post.user = current_user
       respond_to do |format|
         if @post.update(post_params)
           format.html { redirect_to @post, notice: 'Пост был успешно обновлен.' }
@@ -77,7 +77,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.user_id == current_user.id
+    if @post.user = current_user
       @post.destroy
       respond_to do |format|
         format.html { redirect_to posts_url, notice: 'Пост был успешно удален.' }
@@ -89,11 +89,12 @@ class PostsController < ApplicationController
   end
 
   private
+
     def set_post
       @post = Post.find(params[:id])
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, tag_ids: [])
+      params.require(:post).permit(:title, :content)
     end
 end
